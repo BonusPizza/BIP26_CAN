@@ -13,6 +13,7 @@
  * @param txPin GPIO pin number for CAN TX, default is 18
  * @param rxPin GPIO pin number for CAN RX, default is 19
  * @param groupID 4 bit group id
+ * @param mode TWAI operating mode, default is normal mode
  * @param f_config filter config for receiving messages, default is to accept all messages
  * @return true if initialization was successful, false otherwise
  */
@@ -22,7 +23,7 @@ bool BIP26_CAN::begin(uint8_t groupID, int txPin, int rxPin, twai_mode_t mode, t
     twai_general_config_t g_config = TWAI_GENERAL_CONFIG_DEFAULT(
         (gpio_num_t)txPin,
         (gpio_num_t)rxPin,
-        TWAI_MODE_NORMAL
+        mode
     );
 
     twai_timing_config_t t_config = TWAI_TIMING_CONFIG_500KBITS();
