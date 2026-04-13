@@ -19,23 +19,24 @@ void printStatus();
 void setup(){
     Serial.begin(115200);
 
-    while(!can.begin(1, TWAI_MODE_LISTEN_ONLY)){
+    delay(10000);
+
+    while(!can.begin(0xF, TWAI_MODE_LISTEN_ONLY)){
         delay(100);
     }
 
 }
 
 void loop(){
-
   // Example of how to receive messages and print their content
   twai_message_t msg;
-  if(can.receive(msg)){
+  while(can.receive(msg)){
     Serial.print("Message received with id: ");
     Serial.println(msg.identifier, HEX);
     for(int i = 0; i < msg.data_length_code; i++){
-      Serial.print(msg.data[i]);
+      Serial.print((char)msg.data[i]);
     }
-    Serial.println();
+    Serial.println("\n");
     
     /*
     Examples for how to decode the message ID into its components (prio, group, content)
@@ -46,7 +47,8 @@ void loop(){
     
     }
     printStatus();
-    delay(10);
+    Serial.println();
+    delay(1000);
 }
 
 /**
@@ -56,7 +58,7 @@ void printStatus(){
   twai_status_info_t status;
   if(can.getCanInfo(status)){
     if(status.state == TWAI_STATE_RUNNING){
-      Serial.print("Number of Bus Errors");
+      Serial.print("Number of Bus Errors: ");
       Serial.println(status.bus_error_count);
 
       Serial.print("Messages in rx: ");

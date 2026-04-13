@@ -35,33 +35,35 @@ void setup() {
   delay(1000);
 
   // sends ping message with priority 0 and content ID 0xA
-  uint8_t data[] = "ping";
-  if(can.send(0x0, 0xA, data)){
+  uint8_t data[] = {'p', 'i', 'n', 'g'};
+  if(can.send(0x0, 0xA, data, sizeof(data))){
     Serial.println("Started ping-pong example, send ping");
   }
 }
 
 void loop() {
-  Serial.println("Listening...");
+  Serial.print("Device ");
+  Serial.print(groupID);
+  Serial.println(" is listening...");
   twai_message_t msg;
   // example of how to receive messages and print their content
   if(can.receive(msg)){
     Serial.print("Message received with id: ");
     Serial.println(msg.identifier, HEX);
     for(int i = 0; i < msg.data_length_code; i++){
-      Serial.print(msg.data[i]);
+      Serial.print((char)msg.data[i]);
     }
     Serial.println();
 
     // example of how to handle received messages based on their content ID (last 4 bits of the identifier)
     if((msg.identifier & 0xF) == 0xA){
-        u_int8_t answer[] = "pong";
-        if(can.send(0x1, 0xB, answer)){
+        u_int8_t answer[] = {'p', 'o', 'n', 'g', groupID};
+        if(can.send(0x1, 0xB, answer, sizeof(answer))){
             Serial.println("Answered ping with pong");
         }
     } else if ((msg.identifier & 0xF) == 0xB){
-        u_int8_t answer[] = "ping";
-        if(can.send(0x1, 0xB, answer)){
+        u_int8_t answer[] = {'p', 'i', 'n', 'g', groupID};
+        if(can.send(0x1, 0xA, answer, sizeof(answer))){
             Serial.println("Answered pong with ping");
         }
     }   
