@@ -57,12 +57,12 @@ void loop() {
 
     // example of how to handle received messages based on their content ID (last 4 bits of the identifier)
     if((msg.identifier & 0xF) == 0xA){
-        u_int8_t answer[] = {'p', 'o', 'n', 'g', groupID};
+        u_int8_t answer[] = {'p', 'o', 'n', 'g', '0' + groupID};
         if(can.send(0x1, 0xB, answer, sizeof(answer))){
             Serial.println("Answered ping with pong");
         }
     } else if ((msg.identifier & 0xF) == 0xB){
-        u_int8_t answer[] = {'p', 'i', 'n', 'g', groupID};
+        u_int8_t answer[] = {'p', 'i', 'n', 'g', '0' + groupID};
         if(can.send(0x1, 0xA, answer, sizeof(answer))){
             Serial.println("Answered pong with ping");
         }
