@@ -28,7 +28,9 @@ bool BIP26_CAN::begin(uint8_t groupID, int txPin, int rxPin, twai_mode_t mode, t
 
     twai_timing_config_t t_config = TWAI_TIMING_CONFIG_500KBITS();
 
-    twai_driver_install(&g_config, &t_config, &f_config);
+    if(twai_driver_install(&g_config, &t_config, &f_config) != ESP_OK){
+        return false;
+    }
     return twai_start() == ESP_OK;
 }
 
@@ -38,17 +40,14 @@ bool BIP26_CAN::begin(uint8_t groupID, int txPin, int rxPin, twai_mode_t mode, t
  * @param contentID 4 bit content id of the message, used to identify the type of the message
  * @param data byte array containing the data to be sent, max length is 8 bytes. 
  * If data is longer than 8 bytes, it will be truncated to 8 bytes
+ * @param len length of the data byte array
  * @return true if the message was sent successfully, false if unsuccessful
  */
-bool BIP26_CAN::send(uint8_t prio, uint8_t contentID, uint8_t* data){
+bool BIP26_CAN::send(uint8_t prio, uint8_t contentID, uint8_t* data, uint8_t len){
     twai_message_t msg = {};
 
     msg.identifier = buildID(prio, groupID, contentID);
-    msg.data_length_code = sizeof(data);
-
-    if(msg.data_length_code > 8){
-        msg.data_length_code = 8;
-    }
+    msg.data_length_code = (len > 8) ? 8 : len;
 
     memcpy(msg.data, data, msg.data_length_code);
 
@@ -105,6 +104,3 @@ twai_filter_config_t BIP26_CAN::buildGroupFilter(uint8_t groupID){
 uint16_t BIP26_CAN::buildID(uint8_t prio, uint8_t groupID, uint8_t contentID) {
     return ((prio & 0x7) << 8) | ((groupID & 0xF) << 4) | (contentID & 0xF);
 }
-
-
-

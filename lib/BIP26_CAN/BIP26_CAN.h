@@ -18,7 +18,7 @@
 class BIP26_CAN{
     public:
         bool begin(uint8_t groupID, int txPin = 18, int rxPin = 19, twai_mode_t mode = TWAI_MODE_NORMAL, twai_filter_config_t f_config = TWAI_FILTER_CONFIG_ACCEPT_ALL());
-        bool send(uint8_t prio, uint8_t contentID, uint8_t* data);
+        bool send(uint8_t prio, uint8_t contentID, uint8_t* data, uint8_t len);
         bool receive(twai_message_t &msg, TickType_t timeout = pdMS_TO_TICKS(10));
         bool getCanInfo(twai_status_info_t &info);
         twai_filter_config_t buildGroupFilter(uint8_t groupID);
