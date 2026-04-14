@@ -1,4 +1,4 @@
-# BIP26_CAN Library
+# BIP26_CAN Library for ESP32
 This library provides an interface for the BIP26_CAN module, which is designed to facilitate communication over the CAN bus. It was developed for the BIP 2026 at TH Köln and is intended to be used with the custom CAN transceiver boards designed for this project.
 
 ## Useful Information
