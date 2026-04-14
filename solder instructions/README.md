@@ -28,3 +28,5 @@ For the Sub-D connectors, ensure that the male connector is mounted on the left 
 | **Left Side** | **Right Side** |
 |:-------------:|:--------------:|
 | <img src="https://github.com/BonusPizza/BIP26_CAN/blob/main/solder%20instructions/Pictures/Left%20Side.jpeg" width="500" height="500"> | <img src="https://github.com/BonusPizza/BIP26_CAN/blob/main/solder%20instructions/Pictures/Right%20Side.jpeg" width="500" height="500"> |
+
+The pin headers or sockets can be easily cut to the correct size using pliers. J1 and J4 are shown as sockets in the images. Please solder pin headers in the associated positions.
