@@ -2,7 +2,8 @@
  * @file can_filter.cpp
  * @brief Example of how to use the buildGroupFilter function in the BIP26_CAN
  * 
- * temp
+ * This example demonstrates how to use the buildGroupFilter function to create a filter configuration for a specific group ID.
+ * In this example this group ID is 0x5.
  * 
  * @author Luca Krohn
  */

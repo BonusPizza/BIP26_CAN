@@ -39,7 +39,7 @@ bool BIP26_CAN::begin(uint8_t groupID, int txPin, int rxPin, twai_mode_t mode, t
  * @param prio 3 bit priority of the message, lower value means higher priority
  * @param contentID 4 bit content id of the message, used to identify the type of the message
  * @param data byte array containing the data to be sent, max length is 8 bytes. 
- * If data is longer than 8 bytes, it will be truncated to 8 bytes
+ * If data is longer, it will be truncated to 8 bytes
  * @param len length of the data byte array
  * @return true if the message was sent successfully, false if unsuccessful
  */
