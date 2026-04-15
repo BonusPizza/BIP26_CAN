@@ -14,4 +14,4 @@ Simply copy the `BIP26_CAN` folder into the `lib` folder of your PlatformIO proj
 ```#include <BIP26_CAN.h>```
 
 ## Usage
-There are two examples provided in the `examples` folder. Refer to the Files for more (specific) information.
+There are three examples provided in the `examples` folder. Refer to the Files for more (specific) information.
